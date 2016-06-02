@@ -16,4 +16,4 @@ def calculate_GDD(min_t,max_t,base_t):
 
     GDD=(min_t+max_t)/2-base_t
 
-    return GDD
+    return round(GDD,2)
