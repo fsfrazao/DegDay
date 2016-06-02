@@ -14,4 +14,6 @@ def calculate_GDD(min_t,max_t,base_t):
 
     """
 
-    pass
+    GDD=(min_t+max_t)/2-base_t
+
+    return GDD
