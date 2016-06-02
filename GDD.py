@@ -7,23 +7,16 @@ parser.add_argument('file', metavar='file', type=str,
                     temperatures')
 
 args = parser.parse_args()
-print(args.file)
+
+#Read the file passesd as argument into a pandas dataframe
+df = pd.read_csv(args.file)
+
+gdds=df.apply(lambda row: calculate_GDD(min_t=row[0],\
+                max_t=row[1],base_t=10) ,axis=1)
+
+df=pd.concat([df,gdds],axis=1)
 
 
-def load_data(file):
-    """ Reads a csv file.
-
-    Args:
-        file (string): path to csv file containing min and max temperatures.
-
-
-    Returns:
-        pandas dataframe: the csv file as a dataframe
-
-    """
-
-    df = pd.read_csv(file)
-    return df
 
 
 def calculate_GDD(min_t, max_t, base_t):
@@ -44,3 +37,5 @@ def calculate_GDD(min_t, max_t, base_t):
     GDD = (min_t + max_t) / 2-base_t
 
     return round(GDD, 2)
+
+def save_
