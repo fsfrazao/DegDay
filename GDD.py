@@ -1,3 +1,12 @@
+import argparse
+
+parser = argparse.ArgumentParser(description='Calculate Growing Degree Days.')
+parser.add_argument('file', metavar='file', type=str,
+                    help='the file for containing daily min and max temperatures')
+
+args = parser.parse_args()
+print(args.file)
+
 
 def calculate_GDD(min_t,max_t,base_t):
     """ Calculates Growing Degree Days (GDD).
