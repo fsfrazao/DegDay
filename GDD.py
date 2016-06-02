@@ -7,6 +7,7 @@ parser.add_argument('file', metavar='file', type=str,
                     temperatures')
 
 args = parser.parse_args()
+output_name=args.file.split('.')[0]+'_GDD.csv'
 
 #Read the file passesd as argument into a pandas dataframe
 df = pd.read_csv(args.file)
@@ -15,6 +16,9 @@ gdds=df.apply(lambda row: calculate_GDD(min_t=row[0],\
                 max_t=row[1],base_t=10) ,axis=1)
 
 df=pd.concat([df,gdds],axis=1)
+df.rename(columns={0:'gdd'},inplace=True)
+
+df.to_csv(output_name,sep=';')
 
 
 
