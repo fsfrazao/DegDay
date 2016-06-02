@@ -1,4 +1,5 @@
 import argparse
+import pandas as pd
 
 parser = argparse.ArgumentParser(description='Calculate Growing Degree Days.')
 parser.add_argument('file', metavar='file', type=str,
@@ -6,6 +7,23 @@ parser.add_argument('file', metavar='file', type=str,
 
 args = parser.parse_args()
 print(args.file)
+
+
+def load_data(file):
+    """ Reads a csv file.
+
+    Args:
+        file (string): path to csv file containing min and max temperatures.
+
+
+    Returns:
+        pandas dataframe: the csv file as a dataframe
+
+    """
+
+    
+
+
 
 
 def calculate_GDD(min_t,max_t,base_t):
