@@ -3,7 +3,8 @@ import pandas as pd
 
 parser = argparse.ArgumentParser(description='Calculate Growing Degree Days.')
 parser.add_argument('file', metavar='file', type=str,
-                    help='the file for containing daily min and max temperatures')
+                    help='the file for containing daily min and max \
+                    temperatures')
 
 args = parser.parse_args()
 print(args.file)
@@ -21,14 +22,11 @@ def load_data(file):
 
     """
 
-    df=pd.read_csv(file)
+    df = pd.read_csv(file)
     return df
-    
 
 
-
-
-def calculate_GDD(min_t,max_t,base_t):
+def calculate_GDD(min_t, max_t, base_t):
     """ Calculates Growing Degree Days (GDD).
 
     Args:
@@ -43,6 +41,6 @@ def calculate_GDD(min_t,max_t,base_t):
 
     """
 
-    GDD=(min_t+max_t)/2-base_t
+    GDD = (min_t + max_t) / 2-base_t
 
-    return round(GDD,2)
+    return round(GDD, 2)
