@@ -25,8 +25,8 @@ def calculate_GDD(min_t, max_t, base_t):
     """
 
     GDD = (min_t + max_t) / 2 - base_t
-
-    return round(GDD, 2)
+    GDD=round(GDD, 2)
+    return max(GDD,0)
 
 
 #Read the file passesd as argument into a pandas dataframe
