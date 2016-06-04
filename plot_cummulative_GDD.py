@@ -14,5 +14,6 @@ def  read_data(file_name):
     """
     data=pd.read_csv(file_name,sep=',')
     gdds=data['gdd']
+    return gdds.cumsum()
 
     
