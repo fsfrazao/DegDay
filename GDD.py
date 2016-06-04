@@ -33,8 +33,8 @@ def calculate_GDD(min_t, max_t, base_t):
 df = pd.read_csv(args.file,sep=',')
 
 
-gdds=df.apply(lambda row: calculate_GDD(min_t=row[3],\
-                max_t=row[4],base_t=10) ,axis=1)
+gdds=df.apply(lambda row: calculate_GDD(min_t=row['min_t'],\
+                max_t=row['max_t'],base_t=10) ,axis=1)
 
 df=pd.concat([df,gdds],axis=1)
 df.rename(columns={0:'gdd'},inplace=True)
