@@ -9,7 +9,7 @@ def  read_data(file_name):
             file (string): a path to the csv file containing the GDD data.
 
         Returns:
-            list (float): a list with the cummulative GDDs
+            pandas series (float): a pd series object with the cummulative GDDs
 
     """
     data=pd.read_csv(file_name,sep=',')
