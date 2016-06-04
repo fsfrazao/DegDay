@@ -30,15 +30,13 @@ def calculate_GDD(min_t, max_t, base_t):
 
 
 #Read the file passesd as argument into a pandas dataframe
-df = pd.read_csv(args.file,sep=';')
-
-print(args.file.split('.csv'))
+df = pd.read_csv(args.file,sep=',')
 
 
-gdds=df.apply(lambda row: calculate_GDD(min_t=row[0],\
-                max_t=row[1],base_t=10) ,axis=1)
+gdds=df.apply(lambda row: calculate_GDD(min_t=row[3],\
+                max_t=row[4],base_t=10) ,axis=1)
 
 df=pd.concat([df,gdds],axis=1)
 df.rename(columns={0:'gdd'},inplace=True)
 
-df.to_csv(output_name,sep=';')
+df.to_csv(output_name,sep=',')
