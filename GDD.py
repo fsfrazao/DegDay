@@ -9,13 +9,15 @@ parser.add_argument('file', metavar='file', type=str,
 args = parser.parse_args()
 output_name=args.file.split('.csv')[0]+'_GDD.csv'
 
-def calculate_GDD(min_t, max_t, base_t):
+def calculate_GDD(min_t, max_t, base_t, max_threshold):
     """ Calculates Growing Degree Days (GDD).
 
     Args:
         min_t (float): The minimum temperature.
         max_t (float): The maximum temperature.
+        max_threshold (float): Maximum values for max_t
         base_t (float): The base temperature.
+        
 
     Returns:
         float: The number of growing degree days.
@@ -23,7 +25,8 @@ def calculate_GDD(min_t, max_t, base_t):
         This value is always >=0.
 
     """
-
+    if min_t < base_t: min_t = base_t
+    if max_t > max_threshold: max_t = max_threshold
     GDD = (min_t + max_t) / 2 - base_t
     GDD=round(GDD, 2)
     return max(GDD,0)
@@ -34,7 +37,7 @@ df = pd.read_csv(args.file,sep=',')
 
 
 gdds=df.apply(lambda row: calculate_GDD(min_t=row['min_t'],\
-                max_t=row['max_t'],base_t=10) ,axis=1)
+                max_t=row['max_t'],base_t=10,max_threshold=30) ,axis=1)
 
 df=pd.concat([df,gdds],axis=1)
 df.rename(columns={0:'gdd'},inplace=True)
