@@ -26,6 +26,16 @@ def plot_cum_curves(curves, output_file):
 
             output_file (string): file path/name in wich the figure will be saved.
 
-
-
     """
+
+    fig=plt.figure()
+    ax1=plt.subplot2grid((1,1),(0,0))
+    for year in curves.keys():
+        ax1.plot(curves[year], label=year)
+    plt.title("Cummulative Growing Degree Days")
+    plt.xlabel("day")
+    plt.ylabel("GDD")
+    plt.legend()
+
+    plt.savefig(output_file)
+    plt.close(fig)
