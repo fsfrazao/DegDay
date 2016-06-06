@@ -1,6 +1,12 @@
+import argparse
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
+
+parser = argparse.ArgumentParser(description="Plot the cummulative growing degree days for several years in a location")
+parser.add_argument("folder", help="Path to folder with GDD files to be used in the plot")
+
+args = parser.parse_args()
 
 def  cum_gdd_from_file(file_name):
     """Read GDD data from file and return a list with
@@ -39,3 +45,12 @@ def plot_cum_curves(curves, output_file):
 
     plt.savefig(output_file)
     plt.close(fig)
+
+
+GDD_files=os.listdir(args.folder)
+curves={}
+for GDD_file in GDD_files:
+    year=GDD_file.split('_')[1]
+    curves[year]=cum_gdd_from_file(GDD_file)
+
+plot_cum_curves(curves,args.folder)
