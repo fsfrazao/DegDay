@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0.50in}
+\setlength{\textwidth}{5.5in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.0in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{observation}{Observation}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	
+	{\Large \bf
+Growing Degree Days in Canada (Group 4) \\
+
+\vspace*{0.4in}
+}
+Zaynab Musa\\ 
+Frazo, Fabio Soares\\
+Chenxiao Jia\\
+Fatima Shaheen\\
+
+\vspace*{0.4in}  
+\textsc{\small In partial fulfilment of the requirements of CMSC 6950(Computer Based Research Tools and Application),2016}
+
+\end{center}
+\vspace*{5.0in}
+\begin{flushleft}
+{\textsc Memorial University of Newfoundland,} \\
+\today
+\end{flushleft}
+\end{titlepage}
+
+\newpage
+\begin{abstract}
+Growing Degree Days (GDDs) are used to estimate the growth and development of plants and insects during the growing season. Heat units expressed in growing degree days(GDDs) are frequently used to describe the timing of biological process
+
+The objective of this paper is to calculate the GDD for selected cities in Canada. We  also provide a visual representation of the accumulated GDD for selected cities in Canada over a given period.A visual examination of the annual cycle of minimum and maximum daily temperatures for canadian cities is explored.
+
+
+ Finally, we explore how the GDD calculation depends on the base temperature for selected cities in Canada.\\
+
+
+
+ Keywords -- {\bf Growing Degree Days(GDDs)}
+
+
+\end{abstract}
+\newpage
+\tableofcontents
+\newpage
+\section{ \bf Introduction}
+
+\subsection{Growing Degree Days}
+The amount of heat required to move a plant or pest to the next development stage remains constant from year to year.However, the actual amount of time(days) can vary considerably from year to year because of weather conditions. Sometimes called heat units, The Growing Degree Day, or GDD, is a heat index that can be used to predict when a crop will reach maturity. Each day’s GDD is calculated by subtracting a reference temperature, which varies with plant species, from the daily mean temperature (we ignore values less than zero).  
+
+The summation of GDD units can be used for a variety of things: comparing one region to another, comparing one season to another, and predicting important stages in plant and pest development.
+
+
+\subsubsection{Growing Degree Day Equation }
+Using the Averaging method, the GDD is calculated as follows:\\
+$ GDD = Average Daily Temperature - Base Temperature$\\
+where $Average Daily Temperature = T_{max} - T_{min} /2 $\\
+
+We adopt the following constraints:
+\begin{enumerate}
+\item If $GDD < 0$, then $GDD = 0$
+\item If $T_{max} > T_{upper}$ , it is set equal to $T_{upper}$
+\item If $T_{max} or  T_{min}  < 50^{\circ}F or 10^{\circ}C$, it is set equal to $10^{\circ}C$
+\end{enumerate}
+Using Historical Climate data, we explore the following relationships using graphs:
+\begin{enumerate}
+\item The accumulated GDDs for selected cities in Canada over a given period
+\item The GDD dependency on the base temperature for different cities in Canada
+\item The Effective GDD over the island of Newfoundland and other Canadian cities.
+\end{enumerate}
+\subsubsection{Annual Cycle of Air Temperature}
+As the Earth revolves around the Sun, locations on the surface may under go seasonal changes in air temperature because of annual variations in the intensity of net radiation.
+Historical near-surface air temperature data from many cities in canada are available as time series of daily minimum and maximum temperatures. we would also examine in this paper, the annual cycle of minimum and maximum temperatures for Canadian cities
+
+\noindent
+\section{ \bf Overview}
+Section 3 of this paper performs an extensive review on related works in .......
+
+
+\section{\bf Workflow}
+
+\begin{enumerate}
+\item Create a code to automatically download daily historical temperature data for several cities
+\item Load the data into an intermediate data storage format(CSV)
+\item Munge the data by removing legends and extracting relevant columns
+\item Create a function that calculates the GDD for specific base temperature and Upper temperature
+\item Generate plots
+\item Visualization and interperetation of plots
+\end{enumerate}
+
+
+\section{ \bf Data Visualization}
+
+
+\section{Discussion/Interpretation}
+
+
+
+\section{Conclusion/Summary}
+
+\bibliographystyle{plain}
+
+\begin{thebibliography}{99}
+
+\bibitem{ERE 87}
+G. Edward Barton, Robert C. Berwick, and Eric S. Ristad. 1987. 
+{\em Computational Complexity and Natural Language}. MIT Press, Cambridge, 
+MA.
+
+
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
