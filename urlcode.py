@@ -1,3 +1,4 @@
+import pandas as pd
 def url_assembler(stationid,year):
     """Assembles the url
    
@@ -39,4 +40,8 @@ def data_cleaner(url,year,stationid):
         with just the renamed needed columns of the given stationids and years
         
     """
-    pass
+    output_name=stationid + "_"+ year+".csv"
+    data= pd.read_csv(url,sep=',',skiprows=25)#Skip the first 25rows of the url csv file
+    columns= [1,2,3,5,7] # Index by position on the csv 
+    clean_data=data[columns]
+    col_names=clean_data.columns
