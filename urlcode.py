@@ -48,3 +48,8 @@ def data_cleaner(url,year,stationid):
     clean_data.rename(columns={col_names[0]:'year',col_names[1]:'month',col_names[2]:'day',\
     col_names[3]:'max_temp' ,col_names[4]:'min_temp'},inplace=True)
     clean_data.to_csv(output_name,sep=',',index=False)
+
+with open("input_GDD.txt",'r')as input_file:
+    lines=input_file.readlines()
+    lines=[line.rstrip('\n') for line in lines] 
+    lines=[tuple(line.split(',')) for line in lines] 
