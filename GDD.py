@@ -12,7 +12,7 @@ parser.add_argument('output', metavar='output', type=str,
 
 parser.add_argument('--folder',action='store_true',
                     help='Interprets the given path as a directory and\
-                    calculate GDD for all files within.'
+                    calculate GDD for all files within.')
 
 
 
