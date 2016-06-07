@@ -1,4 +1,5 @@
 import argparse
+import os
 import pandas as pd
 
 parser = argparse.ArgumentParser(description='Calculate Growing Degree Days.')
@@ -43,7 +44,7 @@ def calculate_GDD(min_t, max_t, base_t, max_threshold):
 
 
 def process_file(file_name,output_dir ):
-    output=output_dir+file_name('.csv')[0]+'_GDD.csv'
+    output=output_dir+'/'+file_name('.csv')[0]+'_GDD.csv'
     df = pd.read_csv(file_name,sep=',')
 
 
@@ -54,3 +55,10 @@ def process_file(file_name,output_dir ):
     df.rename(columns={0:'gdd'},inplace=True)
 
     df.to_csv(output,sep=',')
+
+if args.folder:
+    input_files=os.listdir(args.path)
+    for input_file in input_files:
+        process_file(file_name=input_file, output_dir=args.output)
+else:
+    process_file(file_name=args.path, output_dir=args.output)
