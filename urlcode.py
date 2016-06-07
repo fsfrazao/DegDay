@@ -14,9 +14,10 @@ def url_assembler(stationid,year):
         url= "http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&stationID="5050"&Year="2013"&timeframe=2&submit=Download+Data"
 
     """
-    pass
 
-
+    url="http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&stationID="
+    url = url+stationid + "&Year="+year+ "&timeframe=2&submit=Download+Data"
+    return url
 
 def data_cleaner(url,year,stationid):
     
