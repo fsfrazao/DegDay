@@ -11,8 +11,7 @@ def url_assembler(stationid,year):
     Returns:
         A complete url string that changes depending on the year and stationId args passed.
         For example: if stationid='5050'and year= 2013
-        url= "http://climate.weather.gc.ca/climate_data/bulk_data_e.html?
-        format=csv&stationID="5050"&Year="2013"&timeframe=2&submit=Download+Data"
+        url= "http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&stationID="5050"&Year="2013"&timeframe=2&submit=Download+Data"
 
     """
     pass
