@@ -53,3 +53,9 @@ with open("input_GDD.txt",'r')as input_file:
     lines=input_file.readlines()
     lines=[line.rstrip('\n') for line in lines] 
     lines=[tuple(line.split(',')) for line in lines] 
+
+for line in lines:
+    stationid=line[0]
+    year = line[1]
+    url= url_assembler(stationid,year)
+    clean_data(url,year,stationid)
