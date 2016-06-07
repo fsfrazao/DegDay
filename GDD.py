@@ -44,7 +44,7 @@ def calculate_GDD(min_t, max_t, base_t, max_threshold):
 
 
 def process_file(file_name,output_dir ):
-    output=output_dir+'/'+file_name('.csv')[0]+'_GDD.csv'
+    output=output_dir+'/'+file_name.split('.csv')[0]+'_GDD.csv'
     df = pd.read_csv(file_name,sep=',')
 
 
