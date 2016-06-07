@@ -48,8 +48,8 @@ def process_file(file_name,output_dir ):
     df = pd.read_csv(file_name,sep=',')
 
 
-    gdds=df.apply(lambda row: calculate_GDD(min_t=row['min_t'],\
-                    max_t=row['max_t'],base_t=10,max_threshold=30) ,axis=1)
+    gdds=df.apply(lambda row: calculate_GDD(min_t=row['min_temp'],\
+                    max_t=row['max_temp'],base_t=10,max_threshold=30) ,axis=1)
 
     df=pd.concat([df,gdds],axis=1)
     df.rename(columns={0:'gdd'},inplace=True)
