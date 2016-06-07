@@ -44,6 +44,22 @@ def calculate_GDD(min_t, max_t, base_t, max_threshold):
 
 
 def process_file(file_path,output_dir ):
+    """ Applies the calculate_GDD function to a file.
+
+        An output file will be created in the output_dir.
+        The name of this file is the name of the input file
+        with '_GDD.csv' in the end.
+        Its contents are the five columns in the input file + a 'gdd' column with the calculated results.
+
+    Args:
+        file_path (string): Path to the input csv file.
+        output_dir (string): Path to the directory in which the
+                             resulting file will be stored.
+
+    Returns:
+        None
+    """
+
     file_name=os.path.split(file_path)[1]
     output=output_dir+'/'+file_name.split('.csv')[0]+'_GDD.csv'
 
