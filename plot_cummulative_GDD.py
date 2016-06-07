@@ -41,7 +41,7 @@ def plot_cum_curves(curves, output_file):
     plt.title("Cummulative Growing Degree Days")
     plt.xlabel("day")
     plt.ylabel("GDD")
-    plt.legend()
+    plt.legend(loc="upper left")
 
     plt.savefig(output_file)
     plt.close(fig)
@@ -51,6 +51,6 @@ GDD_files=os.listdir(args.folder)
 curves={}
 for GDD_file in GDD_files:
     year=GDD_file.split('_')[1]
-    curves[year]=cum_gdd_from_file(GDD_file)
+    curves[year]=cum_gdd_from_file(args.folder+'/'+GDD_file)
 
 plot_cum_curves(curves,args.folder)
