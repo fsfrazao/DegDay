@@ -45,3 +45,6 @@ def data_cleaner(url,year,stationid):
     columns= [1,2,3,5,7] # Index by position on the csv 
     clean_data=data[columns]
     col_names=clean_data.columns
+    clean_data.rename(columns={col_names[0]:'year',col_names[1]:'month',col_names[2]:'day',\
+    col_names[3]:'max_temp' ,col_names[4]:'min_temp'},inplace=True)
+    clean_data.to_csv(output_name,sep=',',index=False)
