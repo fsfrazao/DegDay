@@ -7,7 +7,7 @@ parser.add_argument('path', metavar='path', type=str,
                     help='the path for file or folder containing daily min and max \
                     temperatures')
 
-parser.add_argument('output', metavar='output', type=str,
+parser.add_argument('output_dir', metavar='output_dir', type=str,
                     help='path to directory in which outputs will be saved')
 
 parser.add_argument('--folder',action='store_true',
@@ -43,9 +43,11 @@ def calculate_GDD(min_t, max_t, base_t, max_threshold):
 
 
 
-def process_file(file_name,output_dir ):
+def process_file(file_path,output_dir ):
+    file_name=os.path.split(file_path)[1]
     output=output_dir+'/'+file_name.split('.csv')[0]+'_GDD.csv'
-    df = pd.read_csv(file_name,sep=',')
+
+    df = pd.read_csv(file_path,sep=',')
 
 
     gdds=df.apply(lambda row: calculate_GDD(min_t=row['min_temp'],\
@@ -59,6 +61,9 @@ def process_file(file_name,output_dir ):
 if args.folder:
     input_files=os.listdir(args.path)
     for input_file in input_files:
-        process_file(file_name=input_file, output_dir=args.output)
+        process_file(file_path=args.path+'/'+input_file, output_dir=args.output_dir)
+    """
+    print(args.output_dir)
+    """
 else:
-    process_file(file_name=args.path, output_dir=args.output)
+    process_file(file_name=args.path, output_dir=args.output_dir)
