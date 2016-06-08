@@ -78,8 +78,6 @@ if args.folder:
     input_files=os.listdir(args.path)
     for input_file in input_files:
         process_file(file_path=args.path+'/'+input_file, output_dir=args.output_dir)
-    """
-    print(args.output_dir)
-    """
+    
 else:
     process_file(args.path, args.output_dir)
