@@ -1,10 +1,25 @@
+""" plot_cummulative_GDD
+This program reads .csv files containing daily Growing Degree Days
+and produces a cummulative GDD plot with one curve for each file in the input dicrectory
+
+
+
+Example:
+
+Make a plot using all the files in the ./my/GDD/input/files directory and save the resulting plot as GDD_Basic_2.png in the ./my/cummulative/plots directory
+
+$ python plot_cummulative_GDD.py ./my/GDD/input/files ./my/cummulative/plots/GDD_Basic_2.png
+
+"""
+
 import argparse
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
 
 parser = argparse.ArgumentParser(description="Plot the cummulative growing degree days for several years in a location")
-parser.add_argument("folder", help="Path to folder with GDD files to be used in the plot")
+parser.add_argument("input_folder", help="Path to folder with GDD files to be used in the plot")
+parser.add_argument("output_file", help="Path to file in which figuere will be saved")
 
 args = parser.parse_args()
 
@@ -47,10 +62,10 @@ def plot_cum_curves(curves, output_file):
     plt.close(fig)
 
 
-GDD_files=os.listdir(args.folder)
+GDD_files=os.listdir(args.input_folder)
 curves={}
 for GDD_file in GDD_files:
     year=GDD_file.split('_')[1]
-    curves[year]=cum_gdd_from_file(args.folder+'/'+GDD_file)
+    curves[year]=cum_gdd_from_file(args.input_folder+'/'+GDD_file)
 
-plot_cum_curves(curves,args.folder)
+plot_cum_curves(curves,args.output_file)
