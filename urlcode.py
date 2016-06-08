@@ -1,6 +1,6 @@
 import pandas as pd
 def url_assembler(stationid,year):
-    """Assembles the url
+    """Assembles the url based on the specification on the input file
    
     Retrieves the url pertaining to the given arguments from 
     the environment canada's website 
@@ -10,10 +10,7 @@ def url_assembler(stationid,year):
         year: A string variable that changes ranging from 1894 to 2016
         
     Returns:
-        A complete url string that changes depending on the year and stationId args passed.
-        For example: if stationid='5050'and year= 2013
-        url= "http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&stationID="5050"&Year="2013"&timeframe=2&submit=Download+Data"
-
+        None
     """
 
     url="http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&stationID="
@@ -26,8 +23,9 @@ def data_cleaner(url,year,stationid):
    
     Uses python pandas module to read directly from the url,clean the data
     and,index the position and rename the columns.Output to a csvfile. 
-    Open the file and remove newline charsplit the string.
+    Open the input_file and remove newline charsplit the string.
     Then loop over the lines to write manipulated output to file
+    Saves the output to a folder
     
 
     Args:
@@ -36,9 +34,7 @@ def data_cleaner(url,year,stationid):
         stationid : A string variable that changes depending on the user's preference
         
     Returns:
-        A completely automated downloaded cleaned csv file
-        with just the renamed needed columns of the given stationids and years
-        
+        None
     """
     output_name=stationid + "_"+ year+".csv"
     data= pd.read_csv(url,sep=',',skiprows=25)#Skip the first 25rows of the url csv file
