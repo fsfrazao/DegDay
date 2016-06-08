@@ -1,3 +1,24 @@
+""" GDD
+This program reads .csv file containing daily min and max temperatures and
+calculates the Growing Degree Days for each row in the input file.
+
+It can either process oe single file or run over a directory with multiple files.
+
+Examples:
+
+Calculates GDD for 1706_2005.csv in the current directory and saves the output (1706_2005_GDD.csv) in the same directory.
+
+$ python GDD.py 1706_2005.csv .
+
+
+Calculates GDD for all files in the ./my/input/directory/ saves the output files ./my/output/directory directory.
+
+$ python GDD.py --f ./my/input/directory/ ./my/output/directory
+
+Note that the --folder flag is required when an input directory is given. GDD.py will try to use all files in the input directory.
+"""
+
+
 import argparse
 import os
 import pandas as pd
@@ -78,6 +99,6 @@ if args.folder:
     input_files=os.listdir(args.path)
     for input_file in input_files:
         process_file(file_path=args.path+'/'+input_file, output_dir=args.output_dir)
-    
+
 else:
     process_file(args.path, args.output_dir)
