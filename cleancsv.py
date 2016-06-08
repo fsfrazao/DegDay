@@ -14,4 +14,4 @@ with open(csv_file_name, 'r') as csvfile:
    
     reader = csv.DictReader(csvfile)
     for row in reader:
-        print(row['Date/Time'], row['Min Temp (\xb0C)'])# Print only the needed rows
+        print(row['Date/Time'], row['Min Temp (\xb0C)'], row['Max Temp (\xb0C)'])# Print only the needed rows

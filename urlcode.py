@@ -54,4 +54,4 @@ for line in lines:
     stationid=line[0]
     year = line[1]
     url= url_assembler(stationid,year)
-    clean_data(url,year,stationid)
+    data_cleaner(url,year,stationid)

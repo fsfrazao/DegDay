@@ -1,13 +1,44 @@
+""" GDD
+This program reads .csv file containing daily min and max temperatures and
+calculates the Growing Degree Days for each row in the input file.
+
+It can either process oe single file or run over a directory with multiple files.
+
+Examples:
+
+Calculates GDD for 1706_2005.csv in the current directory and saves the output (1706_2005_GDD.csv) in the same directory.
+
+$ python GDD.py 1706_2005.csv .
+
+
+Calculates GDD for all files in the ./my/input/directory/ saves the output files ./my/output/directory directory.
+
+$ python GDD.py --f ./my/input/directory/ ./my/output/directory
+
+Note that the --folder flag is required when an input directory is given. GDD.py will try to use all files in the input directory.
+"""
+
+
 import argparse
+import os
 import pandas as pd
 
 parser = argparse.ArgumentParser(description='Calculate Growing Degree Days.')
-parser.add_argument('file', metavar='file', type=str,
-                    help='the file for containing daily min and max \
+parser.add_argument('path', metavar='path', type=str,
+                    help='the path for file or folder containing daily min and max \
                     temperatures')
 
+parser.add_argument('output_dir', metavar='output_dir', type=str,
+                    help='path to directory in which outputs will be saved')
+
+parser.add_argument('--folder',action='store_true',
+                    help='Interprets the given path as a directory and\
+                    calculate GDD for all files within.')
+
+
+
 args = parser.parse_args()
-output_name=args.file.split('.csv')[0]+'_GDD.csv'
+
 
 def calculate_GDD(min_t, max_t, base_t, max_threshold):
     """ Calculates Growing Degree Days (GDD).
@@ -17,7 +48,7 @@ def calculate_GDD(min_t, max_t, base_t, max_threshold):
         max_t (float): The maximum temperature.
         max_threshold (float): Maximum values for max_t
         base_t (float): The base temperature.
-        
+
 
     Returns:
         float: The number of growing degree days.
@@ -32,14 +63,42 @@ def calculate_GDD(min_t, max_t, base_t, max_threshold):
     return max(GDD,0)
 
 
-#Read the file passesd as argument into a pandas dataframe
-df = pd.read_csv(args.file,sep=',')
+
+def process_file(file_path,output_dir ):
+    """ Applies the calculate_GDD function to a file.
+
+        An output file will be created in the output_dir.
+        The name of this file is the name of the input file
+        with '_GDD.csv' in the end.
+        Its contents are the five columns in the input file + a 'gdd' column with the calculated results.
+
+    Args:
+        file_path (string): Path to the input csv file.
+        output_dir (string): Path to the directory in which the
+                             resulting file will be stored.
+
+    Returns:
+        None
+    """
+
+    file_name=os.path.split(file_path)[1]
+    output=output_dir+'/'+file_name.split('.csv')[0]+'_GDD.csv'
+
+    df = pd.read_csv(file_path,sep=',')
 
 
-gdds=df.apply(lambda row: calculate_GDD(min_t=row['min_t'],\
-                max_t=row['max_t'],base_t=10,max_threshold=30) ,axis=1)
+    gdds=df.apply(lambda row: calculate_GDD(min_t=row['min_temp'],\
+                    max_t=row['max_temp'],base_t=10,max_threshold=30) ,axis=1)
 
-df=pd.concat([df,gdds],axis=1)
-df.rename(columns={0:'gdd'},inplace=True)
+    df=pd.concat([df,gdds],axis=1)
+    df.rename(columns={0:'gdd'},inplace=True)
 
-df.to_csv(output_name,sep=',')
+    df.to_csv(output,sep=',')
+
+if args.folder:
+    input_files=os.listdir(args.path)
+    for input_file in input_files:
+        process_file(file_path=args.path+'/'+input_file, output_dir=args.output_dir)
+
+else:
+    process_file(args.path, args.output_dir)
