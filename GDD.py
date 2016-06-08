@@ -82,4 +82,4 @@ if args.folder:
     print(args.output_dir)
     """
 else:
-    process_file(file_name=args.path, output_dir=args.output_dir)
+    process_file(args.path, args.output_dir)
