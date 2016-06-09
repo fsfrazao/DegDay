@@ -1,10 +1,11 @@
-
+import os
 import sys
 import pandas as pd
 def url_assembler(stationid,year):
   
     """Assembles the url based on the specification on the input file
        Retrieves the url pertaining to the given arguments
+
     Args:
         stationid:A string variable that changes depending on the input_GDD.txt$
         year: A string variable on the line 1 of input_GDD.txt file
@@ -12,12 +13,15 @@ def url_assembler(stationid,year):
     Returns:
         None
     """
+
     url="http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&stationID="
     url = url+stationid + "&Year="+year+ "&timeframe=2&submit=Download+Data"
     return url
 
 first_arg = sys.argv[1] #First commandline arguement
 second_arg = sys.argv[2]# Second commandline arguement
+os.popen("mkdir "+ str(second_arg)) #Create a directory for the output
+
 
 def data_cleaner(url,year,stationid):
     
@@ -41,7 +45,9 @@ def data_cleaner(url,year,stationid):
         
         folder: The folder that saves the data of the years and stationid 
         specified by the input_GDD.txt
-    
+
+    Example Usage: python3 urlcode.py input_GDD.txt folder
+
     Returns:
         None
     """
