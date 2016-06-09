@@ -56,6 +56,7 @@ def data_cleaner(url,year,stationid):
     data= pd.read_csv(url,sep=',',skiprows=25)#Skip the first 25rows of the url csv file
     columns= [1,2,3,5,7] # Index by position on the csv 
     clean_data=data[columns]
+    clean_data.is_copy= False
     col_names=clean_data.columns
     clean_data.rename(columns={col_names[0]:'year',col_names[1]:'month',col_names[2]:'day',\
     col_names[3]:'max_temp' ,col_names[4]:'min_temp'},inplace=True)
