@@ -31,9 +31,7 @@ parser.add_argument('path', metavar='path', type=str,
 parser.add_argument('output_dir', metavar='output_dir', type=str,
                     help='path to directory in which outputs will be saved')
 
-parser.add_argument('--folder',action='store_true',
-                    help='Interprets the given path as a directory and\
-                    calculate GDD for all files within.')
+
 
 
 
@@ -99,17 +97,11 @@ def apply_GDD(data, base_t=10):
 
     return data
 
+if __name__=="__main__":
 
-if args.folder:
     input_files=os.listdir(args.path)
     for input_file in input_files:
         output_name=args.output_dir+'/'+input_file.split('.csv')[0]+'_GDD.csv'
         data=read_file(file_path=args.path+'/'+input_file)
         output=apply_GDD(data)
         output.to_csv(output_name,sep=',')
-
-
-        #process_file(file_path=args.path+'/'+input_file, output_dir=args.output_dir)
-
-else:
-    process_file(args.path, args.output_dir)
