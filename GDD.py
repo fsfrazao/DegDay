@@ -64,41 +64,52 @@ def calculate_GDD(min_t, max_t, base_t, max_threshold):
 
 
 
-def process_file(file_path,output_dir ):
-    """ Applies the calculate_GDD function to a file.
-
-        An output file will be created in the output_dir.
-        The name of this file is the name of the input file
-        with '_GDD.csv' in the end.
-        Its contents are the five columns in the input file + a 'gdd' column with the calculated results.
+def read_file(file_path):
+    """ Read a .csv file containing min and max temperatures.
 
     Args:
-        file_path (string): Path to the input csv file.
-        output_dir (string): Path to the directory in which the
-                             resulting file will be stored.
+        file_path (string):The path to the file.
 
     Returns:
-        None
+        pandas series: Pandas series object containing the contents of the file.
+
+    """
+    file_name=os.path.split(file_path)[1]
+    df = pd.read_csv(file_path,sep=',')
+    return df
+
+def apply_GDD(data, base_t=10):
+    """ Applies the calculate_GDD function to a series containing min and max temperatures.
+
+    Args:
+        data (pandas series):Series object containing temperature data.
+        base_t (float): The base temperature
+
+    Returns:
+        pandas series: Pandas series object containing the contents of the
+        data plus a new column with the calculated GDD.
     """
 
-    file_name=os.path.split(file_path)[1]
-    output=output_dir+'/'+file_name.split('.csv')[0]+'_GDD.csv'
 
-    df = pd.read_csv(file_path,sep=',')
+    gdds=data.apply(lambda row: calculate_GDD(min_t=row['min_temp'],\
+                    max_t=row['max_temp'],base_t=base_t,max_threshold=30) ,axis=1)
 
+    data=pd.concat([data,gdds],axis=1)
+    data.rename(columns={0:'gdd'},inplace=True)
 
-    gdds=df.apply(lambda row: calculate_GDD(min_t=row['min_temp'],\
-                    max_t=row['max_temp'],base_t=10,max_threshold=30) ,axis=1)
+    return data
 
-    df=pd.concat([df,gdds],axis=1)
-    df.rename(columns={0:'gdd'},inplace=True)
-
-    df.to_csv(output,sep=',')
 
 if args.folder:
     input_files=os.listdir(args.path)
     for input_file in input_files:
-        process_file(file_path=args.path+'/'+input_file, output_dir=args.output_dir)
+        output_name=args.output_dir+'/'+input_file.split('.csv')[0]+'_GDD.csv'
+        data=read_file(file_path=args.path+'/'+input_file)
+        output=apply_GDD(data)
+        output.to_csv(output_name,sep=',')
+
+
+        #process_file(file_path=args.path+'/'+input_file, output_dir=args.output_dir)
 
 else:
     process_file(args.path, args.output_dir)
