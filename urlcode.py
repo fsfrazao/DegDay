@@ -18,9 +18,9 @@ def url_assembler(stationid,year):
     url = url+stationid + "&Year="+year+ "&timeframe=2&submit=Download+Data"
     return url
 
-first_arg = sys.argv[1] #First commandline arguement
-second_arg = sys.argv[2]# Second commandline arguement
-os.popen("mkdir "+ str(second_arg)) #Create a directory for the output
+input_file = sys.argv[1]
+output_folder = sys.argv[2]
+os.popen("mkdir "+ str(output_folder)) #Create a directory for the output
 
 
 def data_cleaner(url,year,stationid):
@@ -51,8 +51,8 @@ def data_cleaner(url,year,stationid):
     Returns:
         None
     """
-    global second_arg
-    output_name=str(second_arg) + '/' + stationid + "_"+ year+".csv"
+    global output_folder
+    output_name=str(output_folder) + '/' + stationid + "_"+ year+".csv"
     data= pd.read_csv(url,sep=',',skiprows=25)#Skip the first 25rows of the url csv file
     columns= [1,2,3,5,7] # Index by position on the csv 
     clean_data=data[columns]
@@ -62,7 +62,7 @@ def data_cleaner(url,year,stationid):
     col_names[3]:'max_temp' ,col_names[4]:'min_temp'},inplace=True)
     clean_data.to_csv(output_name,sep=',',index=False)
 
-with open(first_arg,'r')as input_file:
+with open(input_file,'r')as input_file:
     lines=input_file.readlines()
     lines=[line.rstrip('\n') for line in lines] 
     lines=[tuple(line.split(',')) for line in lines] 
