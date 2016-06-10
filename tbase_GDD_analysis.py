@@ -14,7 +14,7 @@ args = parser.parse_args()
 
 
 def max_cum_GDD(gdds):
-    """Read GDD data from ile, calculate cummulative GDDs and return the maximum value.
+    """Read GDD data from file, calculate cummulative GDDs and return the maximum value.
 
         Args:
             GDD_file (string): a path to the csv file containing the GDD data.
@@ -30,14 +30,37 @@ def max_cum_GDD(gdds):
 
 
 data=GDD.read_file(args.input_file)
-max_gdds={"base_t":[],"gdd":[]}
 
-for base_t in range(0,30):
-    gdd_data=GDD.apply_GDD(data,base_t=base_t)
-    max_gdds["base_t"].append(base_t)
-    max_gdds["gdd"].append(max_cum_GDD(gdd_data['gdd']))
+def base_t_range(data,name,from=0,to=30):
+    """Calculate the max cummulative GDD for varying values of base_t.
 
-df=pd.DataFrame(max_gdds)
+        The range of base temperatures goes from 'from' to 'to' increasing by 1.
+
+        Args:
+            data(pandas series or dataframe): Min and M temperature
+                                data from wich GDD is calculated.
+            name(string): name to be used in the gdd column of the
+                         resulting DataFrame
+            from(integer): First value for base_t
+            to(integer): Last value for base_t
+
+        Returns:
+            pandas DataFrame: 2 columns dataframe. First column
+                 ("base_t") is the value used for base temperature.
+                 Second column (labeled with the name argument) contains the max cummulative gdd for the corresponding base temperature
+    """
+
+    max_gdds={"base_t":[],"gdd":[]}
+
+    for base_t in range(from,to):
+        gdd_data=GDD.apply_GDD(data,base_t=base_t)
+        max_gdds["base_t"].append(base_t)
+        max_gdds["gdd"].append(max_cum_GDD(gdd_data['gdd']))
+
+        df=pd.DataFrame(max_gdds,columns=['base_t',name])
+
+    return df
+
 lm=pd.stats.ols.OLS(x=df["base_t"],y=df["gdd"])
 
 fig=df.plot(kind='scatter',x='base_t',y='gdd')
