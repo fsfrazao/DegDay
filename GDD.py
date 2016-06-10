@@ -18,20 +18,6 @@ import argparse
 import os
 import pandas as pd
 
-parser = argparse.ArgumentParser(description='Calculate Growing Degree Days.')
-parser.add_argument('path', metavar='path', type=str,
-                    help='path to the folder containing daily min and max \
-                    temperature files')
-
-parser.add_argument('output_dir', metavar='output_dir', type=str,
-                    help='path to directory in which outputs will be saved')
-
-
-
-
-
-args = parser.parse_args()
-
 
 def calculate_GDD(min_t, max_t, base_t, max_threshold):
     """ Calculates Growing Degree Days (GDD).
@@ -93,6 +79,16 @@ def apply_GDD(data, base_t=10):
     return data
 
 if __name__=="__main__":
+
+    parser = argparse.ArgumentParser(description='Calculate Growing Degree Days.')
+    parser.add_argument('path', metavar='path', type=str,
+                        help='path to the folder containing daily min and max \
+                        temperature files')
+
+    parser.add_argument('output_dir', metavar='output_dir', type=str,
+                        help='path to directory in which outputs will be saved')
+    args = parser.parse_args()
+
 
     input_files=os.listdir(args.path)
     for input_file in input_files:
