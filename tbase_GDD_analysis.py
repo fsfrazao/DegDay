@@ -25,3 +25,20 @@ def max_cum_GDD(gdds):
     """
     cum_gdd=gdds.cumsum()
     return max(cum_gdd)
+
+
+
+
+data=GDD.read_file(args.input_file)
+max_gdds={"base_t":[],"gdd":[]}
+
+for base_t in range(0,30):
+    gdd_data=GDD.apply_GDD(data,base_t=base_t)
+    max_gdds["base_t"].append(base_t)
+    max_gdds["gdd"].append(max_cum_GDD(gdd_data['gdd']))
+
+df=pd.DataFrame(max_gdds)
+lm=pd.stats.ols.OLS(x=df["base_t"],y=df["gdd"])
+
+fig=df.plot(kind='scatter',x='base_t',y='gdd')
+plt.savefig(args.output_figure)
