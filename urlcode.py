@@ -1,5 +1,4 @@
-
-   """ 
+""" 
  This program automates the GDD calulation download process by
       assembling the url, cleans the data and
       produce the data meant for GDD calculation
@@ -15,8 +14,7 @@
 
     
     Example Usage: python3 urlcode.py input_GDD.txt folder
-
-   """
+ """
 
 
 import os
