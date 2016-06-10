@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import statsmodels.formula.api as smf
 import argparse
 import GDD
+import os
 
 parser = argparse.ArgumentParser(description="Plot the relationship between max growing degree days and base temperature")
 parser.add_argument("input_dir", help="Path to folder with GDD files to be used in the plot")
@@ -29,20 +30,20 @@ def max_cum_GDD(gdds):
 
 
 
-data=GDD.read_file(args.input_file)
 
-def base_t_range(data,name,from=0,to=30):
+
+def base_t_range(data,name,start=0,end=30):
     """Calculate the max cummulative GDD for varying values of base_t.
 
-        The range of base temperatures goes from 'from' to 'to' increasing by 1.
+        The range of base temperatures goes from 'start' to 'end' increasing by 1.
 
         Args:
             data(pandas series or dataframe): Min and M temperature
                                 data from wich GDD is calculated.
             name(string): name to be used in the gdd column of the
                          resulting DataFrame
-            from(integer): First value for base_t
-            to(integer): Last value for base_t
+            start(integer): First value for base_t
+            end(integer): Last value for base_t
 
         Returns:
             pandas DataFrame: 2 columns dataframe. First column
@@ -52,16 +53,37 @@ def base_t_range(data,name,from=0,to=30):
 
     max_gdds={"base_t":[],"gdd":[]}
 
-    for base_t in range(from,to):
+    for base_t in range(start,end):
         gdd_data=GDD.apply_GDD(data,base_t=base_t)
         max_gdds["base_t"].append(base_t)
         max_gdds["gdd"].append(max_cum_GDD(gdd_data['gdd']))
 
-        df=pd.DataFrame(max_gdds,columns=['base_t',name])
+        df=pd.DataFrame(max_gdds)
+        df.rename(columns={"gdd":name},inplace=True)
+
 
     return df
 
-lm=pd.stats.ols.OLS(x=df["base_t"],y=df["gdd"])
 
-fig=df.plot(kind='scatter',x='base_t',y='gdd')
+data_files=os.listdir(args.input_dir)
+name=data_files[0].split('.csv')[0]
+data=GDD.read_file(data_files[0])
+baset_GDD=base_t_range(data=data,name=name)
+
+for data_file in data_files[1:]:
+    name=data_file.split('.csv')[0]
+    data=GDD.read_file(data_file)
+    df=base_t_range(data=data,name=name)
+    baset_GDD=pd.merge(baset_GDD,df)
+
+baset_GDD=pd.melt(baset_GDD,id_vars='base_t',value_vars=[c for c in baset_GDD.columns[1:]])
+
+
+
+
+
+
+#lm=pd.stats.ols.OLS(x=df["base_t"],y=df["gdd"])
+
+fig=baset_GDD.plot(kind='scatter',x='base_t',y='value')
 plt.savefig(args.output_figure)
