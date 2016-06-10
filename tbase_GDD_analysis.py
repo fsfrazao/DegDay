@@ -5,7 +5,7 @@ import argparse
 import GDD
 
 parser = argparse.ArgumentParser(description="Plot the relationship between max growing degree days and base temperature")
-parser.add_argument("input_file", help="Path to folder with GDD files to be used in the plot")
+parser.add_argument("input_dir", help="Path to folder with GDD files to be used in the plot")
 parser.add_argument("output_figure", help="Path to file in which figure will be saved")
 
 args = parser.parse_args()
