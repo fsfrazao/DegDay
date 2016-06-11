@@ -92,6 +92,10 @@ axis.set_ylim([-100,baset_GDD["value"].max()+.05*baset_GDD["value"].max()])
 axis.set_xlim([-1,baset_GDD["base_t"].max()+1])
 
 axis.plot(model(range(30)),ls='-',lw=2,color="black")
+a,b,c=fit
+plt.xlabel("Base temperature (ºC)")
+plt.ylabel("Max Cummulative GDD")
+plt.title("GDD={:.2f}.base_t²+{:.2f}.base_t+{:.2f}".format(a,b,c))
 
 
 axis.legend(numpoints=1,loc='upper right')
