@@ -1,7 +1,20 @@
+import pandas as pd
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import numpy as np
+
 #Ref:http://matplotlib.org/basemap/users/examples.html  
+
+location_data = {'latitude':[43.670495, 53.5444 , 49.406457, 45.500137, 52.139572, 47.570861], 
+                'longitude':[-79.400041,-113.4909 ,-123.151382,-73.563254 ,-106.646736, -52.707866]}
+df = pd.DataFrame(location_data,columns=['latitude', 'longitude'])
+
+labels = ['Toronto','Edmonton','Vancouver', 'Montreal','Saskatoon','St. John\'s']
+x_offsets = [10000, -30000, -25000 , -25000, -30000 , -25000, 10000]
+y_offsets = [5000, -25000, -25000 , -25000, 5000, 4000 ,-25000, 10000]
+for label, xpt, ypt,x_offset, y_offset in zip(labels, x, y,x_offsets,y_offsets):
+    plt.text(xpt + x_offset, ypt + y_offset, label) 
+
 
 #Variable names
 #llcrnrlon      longitude of lower left hand corner of the selected map domain.
