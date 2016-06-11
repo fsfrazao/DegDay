@@ -13,14 +13,7 @@ labels = ['Toronto','Edmonton','Vancouver', 'Montreal','Saskatoon','St. John\'s'
 x_offsets = [10000, -30000, -25000 , -25000, -30000 , -25000, 10000]
 y_offsets = [5000, -25000, -25000 , -25000, 5000, 4000 ,-25000, 10000]
 for label, xpt, ypt,x_offset, y_offset in zip(labels, x, y,x_offsets,y_offsets):
-    plt.text(xpt + x_offset, ypt + y_offset, label) 
-
-
-#Variable names
-#llcrnrlon      longitude of lower left hand corner of the selected map domain.
-#llcrnrlat      latitude of lower left hand corner of the selected map domain.
-#urcrnrlon      longitude of upper right hand corner of the selected map domain.
-#urcrnrlat      latitude of upper right hand corner of the selected map domain.
+    plt.text(xpt + x_offset, ypt + y_offset, label)
 
 
 # Create map of canada using Lambert Conformal Conic projection
@@ -32,20 +25,45 @@ m = Basemap(projection='lcc',
             #Centered at 
             lat_0=30.83158,lon_0=-50.,
             lat_1=-4., 
+            #longitude of lower left hand corner
             llcrnrlon=-147.9927, 
+            #latitude of lower left hand corner
             llcrnrlat=45.49, 
+            #Longitude of upper right hand corner
             urcrnrlon=-36.4459,
+            #Latitude of upper left hand corner
             urcrnrlat=72.8125 ) 
 
-# Draw coastlines and country boundaries, edge of map.
-m.drawmapboundary(fill_color='#99ffff')
-m.fillcontinents(color='#cc9966',lake_color='#99ffff')
+# Draw coastlines 
 m.drawcoastlines()
+
+# Draw country borders on the map
 m.drawcountries() 
+
+#Draw province borders on the map
 m.drawstates()
 
+#Draw map boundries
+m.drawmapboundary(fill_color='#99ffff')
+
+#Fill the land with white
+m.fillcontinents(color='white',lake_color='#99ffff')
+
+#Define our latitude and longitude points
+x,y=m(df['longitude'].values, df['latitude'].values)
+
 #Draw parallels
-m.drawparallels(np.arange(10,70,20),labels=[1,1,0,0])
+parallels = np.arange(0.,90,10.)
+m.drawparallels(parallels,labels=[1,0,0,0],fontsize=10)
+
 #Draw meridians
-m.drawmeridians(np.arange(-100,0,20),labels=[0,0,0,1])
+meridians = np.arange(180.,360.,10.)
+m.drawmeridians(meridians,labels=[0,0,0,1],fontsize=10)
+
+#Plot them using round markers of size 6
+m.plot(x,y,  'bo', markersize=6)
+
+#show the map
 plt.show()
+
+
