@@ -14,3 +14,9 @@ m = Basemap(llcrnrlon=-147.9927, llcrnrlat=45.49, urcrnrlon=-36.4459, urcrnrlat$
               projection='lcc', resolution = 'h', area_thresh = 10000.0,
 lat_1=-5., lat_0=31.84256, lon_0=-53.)
 
+# Draw coastlines and country boundaries, edge of map.
+m.drawmapboundary(fill_color='#99ffff')
+m.fillcontinents(color='#cc9966',lake_color='#99ffff')
+m.drawcoastlines()
+m.drawcountries() 
+m.drawstates()
