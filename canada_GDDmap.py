@@ -22,17 +22,20 @@ for label, xpt, ypt,x_offset, y_offset in zip(labels, x, y,x_offsets,y_offsets):
 #urcrnrlon      longitude of upper right hand corner of the selected map domain.
 #urcrnrlat      latitude of upper right hand corner of the selected map domain.
 
-# set up map projection with the variables
-# use high resolution coastlines.
+
+# Create map of canada using Lambert Conformal Conic projection
 m = Basemap(projection='lcc',
+            #With high resolution
             resolution = 'h', 
-            lat_1=-4., lat_0=30.83158,
+            #And threshold 10000.0
             area_thresh = 10000.0,
+            #Centered at 
+            lat_0=30.83158,lon_0=-50.,
+            lat_1=-4., 
             llcrnrlon=-147.9927, 
             llcrnrlat=45.49, 
             urcrnrlon=-36.4459,
-            urcrnrlat=72.8125,
-            lon_0=-50.)
+            urcrnrlat=72.8125 ) 
 
 # Draw coastlines and country boundaries, edge of map.
 m.drawmapboundary(fill_color='#99ffff')
