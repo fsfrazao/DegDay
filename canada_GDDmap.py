@@ -22,7 +22,7 @@ for label, xpt, ypt,x_offset, y_offset in zip(labels, x, y,x_offsets,y_offsets):
 #urcrnrlon      longitude of upper right hand corner of the selected map domain.
 #urcrnrlat      latitude of upper right hand corner of the selected map domain.
 
-# set up map projection with
+# set up map projection with the variables
 # use high resolution coastlines.
 m = Basemap(projection='lcc',
             resolution = 'h', 

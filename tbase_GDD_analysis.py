@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import statsmodels.formula.api as smf
+import numpy as np
 import argparse
 import GDD
 import os
@@ -26,9 +26,6 @@ def max_cum_GDD(gdds):
     """
     cum_gdd=gdds.cumsum()
     return max(cum_gdd)
-
-
-
 
 
 
@@ -67,23 +64,37 @@ def base_t_range(data,name,start=0,end=30):
 
 data_files=os.listdir(args.input_dir)
 name=data_files[0].split('.csv')[0]
-data=GDD.read_file(data_files[0])
+data=GDD.read_file(args.input_dir+'/'+data_files[0])
 baset_GDD=base_t_range(data=data,name=name)
 
 for data_file in data_files[1:]:
     name=data_file.split('.csv')[0]
-    data=GDD.read_file(data_file)
+    data=GDD.read_file(args.input_dir+'/'+data_file)
     df=base_t_range(data=data,name=name)
     baset_GDD=pd.merge(baset_GDD,df)
 
+
 baset_GDD=pd.melt(baset_GDD,id_vars='base_t',value_vars=[c for c in baset_GDD.columns[1:]])
+fit=np.polyfit(x=baset_GDD["base_t"],y=baset_GDD["value"],deg=2)
+model=np.poly1d(fit)
+
+groups=baset_GDD.groupby("variable")
 
 
+colors = pd.tools.plotting._get_standard_colors(len(groups), color_type='random')
 
 
+fig,axis=plt.subplots()
+axis.set_color_cycle(colors)
+for name, group in groups:
+    axis.plot(group.base_t,group.value,marker='o',linestyle='',ms=5,label=name)
+axis.set_ylim([-100,baset_GDD["value"].max()+.05*baset_GDD["value"].max()])
+axis.set_xlim([-1,baset_GDD["base_t"].max()+1])
+
+axis.plot(model(range(30)),ls='-',lw=2,color="black")
 
 
-#lm=pd.stats.ols.OLS(x=df["base_t"],y=df["gdd"])
+axis.legend(numpoints=1,loc='upper right')
 
-fig=baset_GDD.plot(kind='scatter',x='base_t',y='value')
+#fig=baset_GDD.plot(kind='scatter',x='base_t',y='value')
 plt.savefig(args.output_figure)
