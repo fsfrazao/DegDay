@@ -10,9 +10,15 @@ import numpy as np
 #urcrnrlat      latitude of upper right hand corner of the selected map domain.
 
 #Lambert conformal Conic map
-m = Basemap(llcrnrlon=-147.9927, llcrnrlat=45.49, urcrnrlon=-36.4459, urcrnrlat$
-              projection='lcc', resolution = 'h', area_thresh = 10000.0,
-lat_1=-5., lat_0=31.84256, lon_0=-53.)
+m = Basemap(projection='lcc',
+            resolution = 'h', 
+            lat_1=-4., lat_0=30.83158,
+            area_thresh = 10000.0,
+            llcrnrlon=-147.9927, 
+            llcrnrlat=45.49, 
+            urcrnrlon=-36.4459,
+            urcrnrlat=72.8125,
+            lon_0=-50.)
 
 # Draw coastlines and country boundaries, edge of map.
 m.drawmapboundary(fill_color='#99ffff')
