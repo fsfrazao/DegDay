@@ -9,7 +9,7 @@ import numpy as np
 #urcrnrlon      longitude of upper right hand corner of the selected map domain.
 #urcrnrlat      latitude of upper right hand corner of the selected map domain.
 
-# set up map projection with
+# set up map projection with the variables
 # use high resolution coastlines.
 m = Basemap(projection='lcc',
             resolution = 'h', 
