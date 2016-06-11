@@ -9,7 +9,8 @@ import numpy as np
 #urcrnrlon      longitude of upper right hand corner of the selected map domain.
 #urcrnrlat      latitude of upper right hand corner of the selected map domain.
 
-#Lambert conformal Conic map
+# set up map projection with
+# use high resolution coastlines.
 m = Basemap(projection='lcc',
             resolution = 'h', 
             lat_1=-4., lat_0=30.83158,
