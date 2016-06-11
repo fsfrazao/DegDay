@@ -20,3 +20,9 @@ m.fillcontinents(color='#cc9966',lake_color='#99ffff')
 m.drawcoastlines()
 m.drawcountries() 
 m.drawstates()
+
+#Draw parallels
+m.drawparallels(np.arange(10,70,20),labels=[1,1,0,0])
+#Draw meridians
+m.drawmeridians(np.arange(-100,0,20),labels=[0,0,0,1])
+plt.show()
