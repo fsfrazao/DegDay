@@ -6,14 +6,26 @@ import pandas as pd
 from datetime import datetime
 
 def bytespdate2num(fmt, encoding='utf-8'):
+    """Converting data stamps for Matplotlib
+    
+        Args:
+            Function bytespdate2num() takes the data, decodes the data based on the encoding, then it returns that.
+    
+    """
     strconverter = mdates.strpdate2num(fmt)
     def bytesconverter(b):
         s = b.decode(encoding)
         return strconverter(s)
     return bytesconverter
 
-def read_weather(file_name):
 
+def read_weather(file_name):
+    """Read MinMax csv file
+
+        Args:
+            read_weather(file_name): a path to the csv file containing the MinMax data.
+        
+    """
     dtypes = np.dtype({ 'names' : ('date','max temp', 'min temp'),
                         'formats' : ['S9', np.float,np.float] })
 
@@ -21,29 +33,20 @@ def read_weather(file_name):
             usecols=(0,1,2),dtype=dtypes,unpack=True,converters={0:dt.bytespdate2num('%Y-%m-%d')})    
     return dates,max_temp,min_temp
 
-dates,max_temp,min_temp=read_weather('1706_2010.csv')
-maxy,=plt.plot_date(dates,max_temp,'r-',label="Max")
-mint,=plt.plot_date(dates,min_temp,'b-',label="Min")
-plt.legend(handles=[maxy,mint])
-plt.title("1706's 2010 temp")
-plt.ylabel("temp")
-plt.xlabel("date")
-plt.show()
-
-dates,max_temp,min_temp=read_weather('889_2010.csv')
-maxy,=plt.plot_date(dates,max_temp,'r-',label="Max")
-mint,=plt.plot_date(dates,min_temp,'b-',label="Min")
-plt.legend(handles=[maxy,mint])
-plt.title("889's 2010 temp")
-plt.ylabel("temp")
-plt.xlabel("date")
-plt.show()
-
-dates,max_temp,min_temp=read_weather('6720_2010.csv')
-maxy,=plt.plot_date(dates,max_temp,'r-',label="Max")
-mint,=plt.plot_date(dates,min_temp,'b-',label="Min")
-plt.legend(handles=[maxy,mint])
-plt.title("6720's 2010 temp")
-plt.ylabel("temp")
-plt.xlabel("date")
-plt.show()
+def plot_MinMax(csv_file):
+    """Plot the Min and Max Temperature curves.
+        
+        Args:
+            plt.savefig(csv_file[:-3]+"png", format="png") keeps 3 plots of different cities with different names, which means the old plot will not be covered by the new one.
+            
+    """
+    dates,max_temp,min_temp = read_weather(csv_file)
+    maxy,=plt.plot_date(dates,max_temp,'r-',label="Max")
+    mint,=plt.plot_date(dates,min_temp,'b-',label="Min")
+    plt.legend(handles=[maxy,mint])
+    plt.title("Min and Max Temperature")
+    plt.ylabel("temp")
+    plt.xlabel("date")
+    plot = plt.savefig(csv_file[:-3]+"png", format="png")
+    #plt.show()
+    return plot
