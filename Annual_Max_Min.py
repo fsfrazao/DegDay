@@ -48,5 +48,4 @@ def plot_MinMax(csv_file):
     plt.ylabel("temp")
     plt.xlabel("date")
     plot = plt.savefig(csv_file[:-3]+"png", format="png")
-    #plt.show()
     return plot
