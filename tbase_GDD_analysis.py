@@ -1,3 +1,22 @@
+""" tbase_GDD_analysis
+
+This program analyses the relationsip between GDD and base temperature
+
+It reads .csv files containing daily min and max temperatures
+and calculates the maximum cummulative degree days for each dataset in a range of base temperatures (0-29 ºC). It then fits a second order model to the data and produces a plot.
+
+
+
+Example:
+
+    Use all files in the ./my/GDD/input/files directory and save the resulting plot as GDD_Optional_3.png in the ./my/plots directory
+
+    $ python tbase_GDD_analysis.py ./my/GDD/input/files ./my/plots/GDD_Optional_3.png
+
+"""
+
+
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,7 +25,7 @@ import GDD
 import os
 
 parser = argparse.ArgumentParser(description="Plot the relationship between max growing degree days and base temperature")
-parser.add_argument("input_dir", help="Path to folder with GDD files to be used in the plot")
+parser.add_argument("input_dir", help="Path to folder with .csv files to be used in analysis")
 parser.add_argument("output_figure", help="Path to file in which figure will be saved")
 
 args = parser.parse_args()
