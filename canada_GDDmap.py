@@ -10,6 +10,8 @@ location_data = {'latitude':[43.670495, 53.5444 , 49.406457, 45.500137, 52.13957
 df = pd.DataFrame(location_data,columns=['latitude', 'longitude'])
 
 labels = ['Toronto','Edmonton','Vancouver', 'Montreal','Saskatoon','St. John\'s']
+#Define our latitude and longitude points
+x,y=m(df['longitude'].values, df['latitude'].values)
 x_offsets = [10000, -30000, -25000 , -25000, -30000 , -25000, 10000]
 y_offsets = [5000, -25000, -25000 , -25000, 5000, 4000 ,-25000, 10000]
 for label, xpt, ypt,x_offset, y_offset in zip(labels, x, y,x_offsets,y_offsets):
@@ -48,9 +50,6 @@ m.drawmapboundary(fill_color='#99ffff')
 
 #Fill the land with white
 m.fillcontinents(color='white',lake_color='#99ffff')
-
-#Define our latitude and longitude points
-x,y=m(df['longitude'].values, df['latitude'].values)
 
 #Draw parallels
 parallels = np.arange(0.,90,10.)
