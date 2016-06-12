@@ -53,6 +53,7 @@ def read_file(file_path):
         pandas series: Pandas series object containing the contents of the file.
 
     """
+    if type(file_path)==bytes: file_path=file_path.decode()
     file_name=os.path.split(file_path)[1]
     df = pd.read_csv(file_path,sep=',')
     return df
