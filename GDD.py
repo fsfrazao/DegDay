@@ -1,16 +1,25 @@
 """ GDD
-This program reads .csv file containing daily min and max temperatures and
-calculates the Growing Degree Days for each row in the input file.
+This module contains functions for calculating Growind Degree Days.
 
-It expects one the input directory to passed as the first argument and the output directory to be passed as the second.
-It doe not accept a file name as input argument. If only one file is to be processed, it should still be in a directory (with no other file).
-GDD.py will try to use all files in the input directory.
+Functions:
+    read_file(file_path)
+    calculate_GDD(min_t, max_t, base_t, max_threshold)
+    apply_GDD(data, base_t=10)
 
-Example:
 
-Calculates GDD for all files in the ./my/input/directory/ saves the output files ./my/output/directory directory.
+Script use:
+    This program reads .csv file containing daily min and max temperatures and
+    calculates the Growing Degree Days for each row in the input file.
 
-$ python GDD.py ./my/input/directory/ ./my/output/directory
+    It expects one the input directory to passed as the first argument and the output directory to be passed as the second.
+    It doe not accept a file name as input argument. If only one file is to be processed, it should still be in a directory (with no other file).
+    GDD.py will try to use all files in the input directory.
+
+    Example:
+
+        Calculates GDD for all files in the ./my/input/directory/ saves the output files ./my/output/directory directory.
+
+        $ python GDD.py ./my/input/directory/ ./my/output/directory
 """
 
 
