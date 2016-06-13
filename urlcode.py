@@ -70,7 +70,7 @@ def data_cleaner(url,year,stationid):
     clean_data=data[columns]
     clean_data.is_copy= False
     col_names=clean_data.columns
-    clean_data.rename(columns={col_names[0]:'date'\
+    clean_data.rename(columns={col_names[0]:'date',\
     col_names[1]:'max_temp' ,col_names[2]:'min_temp'},inplace=True)
     clean_data.to_csv(output_name,sep=',',index=False)
 
