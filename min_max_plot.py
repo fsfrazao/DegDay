@@ -4,6 +4,7 @@ import matplotlib.dates as dt
 import numpy as np
 import pandas as pd
 from datetime import datetime
+import sys
 
 def bytespdate2num(fmt, encoding='utf-8'):
     """Converting data stamps for Matplotlib
@@ -47,5 +48,13 @@ def plot_MinMax(csv_file):
     plt.title("Min and Max Temperature")
     plt.ylabel("temp")
     plt.xlabel("date")
-    plot = plt.savefig(csv_file[:-3]+"png", format="png")
-    return plot
+    plot_min_max = plt.savefig(csv_file[:-3]+"png", format="png")
+    return plot_min_max
+
+try:
+	csv_file=sys.argv[1]
+	plot_MinMax(csv_file)
+
+except Exception as e:
+	raise e
+	print(e)
