@@ -3,8 +3,7 @@
 This program analyses the relationsip between GDD and base temperature
 
 It reads .csv files containing daily min and max temperatures
-and calculates the maximum cummulative degree days for each dataset in a range of base temperatures (0-29 ºC). It then fits a second order model to the data and produces a plot.
-
+and calculates the maximum cummulative degree days for each dataset in a range of base temperatures (0-29 C). It then fits a second order model to the data and produces a plot.
 
 
 Example:
@@ -112,9 +111,9 @@ axis.set_xlim([-1,baset_GDD["base_t"].max()+1])
 
 axis.plot(model(range(30)),ls='-',lw=2,color="black")
 a,b,c=fit
-plt.xlabel("Base temperature (ºC)")
+plt.xlabel("Base temperature (C)")
 plt.ylabel("Max Cummulative GDD")
-plt.title("GDD={:.2f}.base_t²+{:.2f}.base_t+{:.2f}".format(a,b,c))
+plt.title("GDD={:.2f}.base_t^2+{:.2f}.base_t+{:.2f}".format(a,b,c))
 
 
 axis.legend(numpoints=1,loc='upper right')

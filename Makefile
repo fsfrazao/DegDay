@@ -1,4 +1,4 @@
-all:GDD_Basic_2.png
+all:GDD_Basic_2.png GDD_Optional_3.png
 
 ./csv-data/*.csv:input_GDD.txt
 	mkdir -p Task4_input
@@ -8,6 +8,9 @@ all:GDD_Basic_2.png
 
 GDD_Basic_2.png:./csv-data/*.csv
 	python plot_cummulative_GDD.py ./csv-data ./GDD_Basic_2.png
+
+GDD_Optional_3.png:./csv-data/*.csv
+	python tbase_GDD_analysis.py ./Task4_input ./GDD_Optional_3.png
 
 ###################################################################################################
 url_MinMax:Input_MinMax.txt
