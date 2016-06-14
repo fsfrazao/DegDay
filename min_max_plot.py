@@ -54,10 +54,10 @@ def plot_MinMax(csv_file):
     plt.ylabel("temp")
     plt.xlabel("date")
     #save plot to output directory, this is just my local directory which can be changed.
-    filename = os.path.join('/home/darren/Downloads/DegDay/output', csv_file[:-3]+"png")
+    filename = os.path.join("../output", csv_file[:-3]+"png")
     plot_min_max = plt.savefig(filename)
 
-path=os.chdir('folder')	
+path=os.chdir('Task4_input')
 csv_folder_file = glob('*.csv')
 
 
