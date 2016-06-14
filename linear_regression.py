@@ -1,37 +1,61 @@
 
 # coding: utf-8
 
-# In[ ]:
+# """""This function takes as argument the path to the directory containing all the input files and returns a the plotog the cummulative GDD over a period of time.
+# it also takes the summary and stores it in a txt file called learnedmodel.txt""""
 
-# Provided the input directory containing the .gdd files for a given city over a period of years, the dataframe 'data' 
-#coprises the merged data.
+# In[1]:
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import glob
-import statsmodels.formula.api as smf
-from scipy import stats
 from datetime import datetime
+from matplotlib.ticker import ScalarFormatter, FormatStrFormatter
+import statsmodels.formula.api as smf
+import argparse
+import os
 
-path =r'./GDD/inputfiles' # use your path
-allFiles = glob.glob(path + "/*.csv")
-data = pd.DataFrame()
-list_ = []
-for file_ in allFiles:
-    df = pd.read_csv(file_,index_col=0)
-    list_.append(df)
-data = pd.concat(list_)
-#data.head()
+def merge_gdd(input_dir):
+    #path = open(input_dir+"/*.csv", "r")
+    allFiles = glob.glob(input_dir + "/*.csv")
+    data = pd.DataFrame()
+    list_ = []
+    for file_ in allFiles:
+        df = pd.read_csv(file_,index_col=0)
+        list_.append(df)
+    data = pd.concat(list_)
+    data=data.fillna(0)
+    data.date= pd.to_datetime(data['date'], format='%Y-%m-%d')
+    data['year'] = data['date'].dt.year
+    data['Asum']= data.gdd.cumsum()
+    g1= data.groupby(by=['year'])['gdd'].sum()
+    df = g1.to_frame()
+    df['year'] = df['gdd'].index
+    lm = smf.ols(formula='gdd ~ year', data=df).fit()
+    lm.params
+    lm.summary()
+    result=lm.fittedvalues
+    with open('learnedmodel.txt','w') as f:
+        f.write(lm.summary().as_latex())
+    #plt.ion()
+    ax=df.plot(kind='scatter', x='year', y='gdd',label='cum gdd')
+    plt.plot(df.year,result, c='red', linewidth=2)
+    ax.xaxis.set_major_formatter(FormatStrFormatter('%.0f'))
+    ax.set(ylabel='Cummulative GDD')
+    ax.set(title='Linear Regression')
+    ax.legend()
+    return plt.show()
 
-#The cummulative gdd is plotted over the years
-ax= data.groupby(by=['year'])['gdd'].sum().plot(title = 'Cummulative GDD in St. Johns for 5 years',color = 'r', marker = 'o', ls = '')
-ax.set(ylabel='Cummulative GDD')
+merge_gdd("./GDD/outputfiles/") 
+   
 
-# regression analysis is carried out over gdd and time
-lm = smf.ols(formula='data.gdd ~ data.gdd.index', data=data).fit()
 
-# print the coefficients
-lm.params
-#print the summary
-lm.summary()
+               
+         
+
+
+# In[ ]:
+
+
 
