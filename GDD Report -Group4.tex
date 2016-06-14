@@ -5,6 +5,7 @@
 \setlength{\textheight}{8.0in}
 
 \newtheorem{theorem}{Theorem}
+\usepackage{graphicx}
 \newtheorem{lemma}{Lemma}
 \newtheorem{observation}{Observation}
 \newtheorem{definition}{Definition}
@@ -24,7 +25,7 @@ Growing Degree Days in Canada (Group 4) \\
 \vspace*{0.4in}
 }
 Zaynab Musa\\ 
-Frazao, Fabio\\
+Frazao, Fabio Soares\\
 Chenxiao Jia\\
 Fatima Shaheen\\
 Dianlong Zhang\\
@@ -57,6 +58,7 @@ The objective of this paper is to calculate the GDD for selected cities in Canad
 \end{abstract}
 \newpage
 \tableofcontents
+\listoffigures
 \newpage
 \section{ \bf Introduction}
 
@@ -104,14 +106,22 @@ Section 3 of this paper performs an extensive review on related works in .......
 \end{enumerate}
 
 
-\section{ \bf Data Visualization}
+
+\begin{figure}[h]
+  \includegraphics[width=15cm]{cummulative_GDD.png}
+  \caption{Cummulative GDD for 3 cities.}
+ \includegraphics[width=20cm]{min_max_temperature.png}
+  \caption{Annual Minimum and Maximum temperature.}
+ \includegraphics[width=15cm]{tbase_analysis.png}
+  \caption{The variation of GDD with the base temperature}
+
+\end{figure}
 
 
-\section{Discussion/Interpretation}
 
 
 
-\section{Conclusion/Summary}
+
 
 \bibliographystyle{plain}
 
@@ -121,6 +131,7 @@ Section 3 of this paper performs an extensive review on related works in .......
 G. Edward Barton, Robert C. Berwick, and Eric S. Ristad. 1987. 
 {\em Computational Complexity and Natural Language}. MIT Press, Cambridge, 
 MA.
+
 
 
 \end{thebibliography}
