@@ -43,8 +43,8 @@ def plot_MinMax(csv_file):
     """Plot the Min and Max Temperature curves.
         
         Args:
-            plt.savefig(csv_file[:-3]+"png", format="png") keeps 3 plots of different cities with different names, which means the old plot will not be covered by the new one.
-            
+            os.path.join('/home/darren/Downloads/DegDay/output', csv_file[:-3]+"png") makes three png files save into output directory
+            plt.savefig(filename) plot the three png files
     """
     dates,max_temp,min_temp = read_weather(csv_file)
     maxy,=plt.plot_date(dates,max_temp,'r-',label="Max")
@@ -53,7 +53,7 @@ def plot_MinMax(csv_file):
     plt.title("Min and Max Temperature")
     plt.ylabel("temp")
     plt.xlabel("date")
-    #save plot to output directory
+    #save plot to output directory, this is just my local directory which can be changed.
     filename = os.path.join('/home/darren/Downloads/DegDay/output', csv_file[:-3]+"png")
     plot_min_max = plt.savefig(filename)
 
