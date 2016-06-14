@@ -68,7 +68,7 @@ m.drawstates()
 m.drawmapboundary(fill_color='#99ffff')
 
 #Fill the land with white
-m.fillcontinents(color='white',lake_color='#99ffff')
+m.fillcontinents(color='white',lake_color='#99ffff', zorder=1)
 
 #Draw parallels
 parallels = np.arange(0.,90,10.)
@@ -78,10 +78,9 @@ m.drawparallels(parallels,labels=[1,0,0,0],fontsize=10)
 meridians = np.arange(180.,360.,10.)
 m.drawmeridians(meridians,labels=[0,0,0,1],fontsize=10)
 
-#Plot them using round markers of size 6
-m.plot(x,y,  'bo', markersize=6)
-
-#show the map
+#Plot
+m.scatter(x, y, c=EGDD, alpha =0.3, s =2500, cmap=cm2.get_cmap('jet'), zorder=2)
+m.scatter(x, y, c=EGDD, alpha=0.3, s=500, cmap=cm2.get_cmap('jet'), zorder=3)
 plt.show()
 
 
