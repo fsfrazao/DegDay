@@ -1,10 +1,4 @@
-import pandas as pd
-from mpl_toolkits.basemap import Basemap
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib import cm as cm2
-
-""" Plot the Effective Growing Degree Days Canada
+""" Plot the Effective Growing Degree Canada
  
  This script plots the effective Growing Degree Days on the map of Canada
  From year 2001 to 2005. 
@@ -15,15 +9,21 @@ from matplotlib import cm as cm2
  
  Run script to get the Effective growing degree days of the year 2001-2005 from the commandline
  
- $ python canada_GDDmap.py 
- """
+ $ python map.py 
+"""
+
+
+import pandas as pd
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import cm as cm2
 
 
 #Ref:http://matplotlib.org/basemap/users/examples.html  
 
 # The effective GDD average for 5years
 EGDD = np.array([1310.1, 554.34, 1098.8, 1388.8, 318.82, 618.9,989.86])
-
 
 # Create map of canada using Lambert Conformal Conic projection
 m = Basemap(projection='lcc',
