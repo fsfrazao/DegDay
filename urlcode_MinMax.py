@@ -1,4 +1,20 @@
+"""
+ This program automates the MinMax Temperature download process by
+      assembling the url, cleans the data and
+      produce the data meant for MinMax Temperature plotting
+    Commandline Args:
+        input_MinMax.txt : The editable text file indicating stationid and year
+        we could get more stationid and year data by simply adding more to
+        stationid to line 0 and years to line 1 of this file
+        folder: The folder that saves the data of the years and stationid
+        specified by the input_MinMax.txt
+    Example Usage: python urlcode_MinMax.py input_GDD.txt folder
+ """
+
 import pandas as pd
+import os
+import sys
+
 def url_assembler(stationid,year):
     """Assembles the url
    
@@ -20,6 +36,10 @@ def url_assembler(stationid,year):
     url = url+stationid + "&Year="+year+ "&timeframe=2&submit=Download+Data"
     return url
 
+input_file = sys.argv[1]
+output_folder = sys.argv[2]
+os.popen("mkdir "+ str(output_folder)) #Create a directory for the output
+
 def data_cleaner(url,year,stationid):
     
     """Reads files directly from the url and cleans the data 
@@ -40,19 +60,18 @@ def data_cleaner(url,year,stationid):
         with just the renamed needed columns of the given stationids and years
         
     """
-    output_name=stationid + "_"+ year+".csv"
+    output_name=str(output_folder) + '/' + stationid + "_"+ year+".csv"
     data= pd.read_csv(url,sep=',',skiprows=25)#Skip the first 25rows of the url csv file
     #columns= [1,2,3,5,7] # Index by position on the csv 
     columns= [0,5,7]
     clean_data=data[columns]
+    clean_data.is_copy = False
     col_names=clean_data.columns
-    #clean_data.rename(columns={col_names[0]:'year-month-day',col_names[1]:'month',col_names[2]:'day',\
     clean_data.rename(columns={col_names[0]:'date',\
-    #col_names[3]:'max_temp' ,col_names[4]:'min_temp'},inplace=True)
     col_names[1]:'max_temp' ,col_names[2]:'min_temp'},inplace=True)
     clean_data.to_csv(output_name,sep=',',index=False)
 
-with open("Input_MinMax.txt",'r')as input_file:
+with open(input_file,'r')as input_file:
     lines=input_file.readlines()
     lines=[line.rstrip('\n') for line in lines] 
     lines=[tuple(line.split(',')) for line in lines] 
