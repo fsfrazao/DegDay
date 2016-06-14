@@ -26,7 +26,7 @@ GDD_Optional_3.png:./csv-data/*.csv
 	python min_max_plot.py
 
 ./output/linear/*.png:./linear-csv-input/*.csv
-	python linear_regression.py
+	python linear_regression.py ./linear-csv-cum-input ./output/linear_model_plot.png
 
 ###################################################################################################
 url_MinMax:Input_MinMax.txt
