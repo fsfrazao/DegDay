@@ -14,6 +14,7 @@ GDD_Optional_3.png:./csv-data/*.csv
 	python tbase_GDD_analysis.py ./Task4_input ./GDD_Optional_3.png
 
 ./output/*.png:./csv-data/*.csv
+	mkdir -p output
 	python min_max_plot.py
 
 ###################################################################################################
