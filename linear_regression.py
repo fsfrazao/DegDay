@@ -15,6 +15,7 @@ from matplotlib.ticker import ScalarFormatter, FormatStrFormatter
 import statsmodels.formula.api as smf
 import argparse
 import os
+import time
 
 def merge_gdd(input_dir):
     #path = open(input_dir+"/*.csv", "r")
@@ -44,10 +45,11 @@ def merge_gdd(input_dir):
     ax.xaxis.set_major_formatter(FormatStrFormatter('%.0f'))
     ax.set(ylabel='Cummulative GDD')
     ax.set(title='Linear Regression')
-    ax.legend()
-    return plt.show()
+    tm=str(time.time())
+    filename = "./output/"+"Linear_time_"+tm[:-6]+".png"
+    plt.savefig(filename)
 
-merge_gdd("./GDD/outputfiles/") 
+merge_gdd("./linear-csv-cum-input") 
    
 
 
