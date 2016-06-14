@@ -17,7 +17,13 @@ import argparse
 import os
 import time
 
-def merge_gdd(input_dir):
+parser = argparse.ArgumentParser(description="Fit a linear model to the cummulative growing degree days data over several years (explanatory variable)make a plot")
+parser.add_argument("input_dir", help="Path to folder with GDD files to be used in the model")
+parser.add_argument("output_file", help="Path to file in which figure will be saved")
+
+args = parser.parse_args()
+
+def merge_gdd(input_dir, output_file):
     #path = open(input_dir+"/*.csv", "r")
     allFiles = glob.glob(input_dir + "/*.csv")
     data = pd.DataFrame()
@@ -46,18 +52,15 @@ def merge_gdd(input_dir):
     ax.set(ylabel='Cummulative GDD')
     ax.set(title='Linear Regression')
     tm=str(time.time())
-    filename = "./output/"+"Linear_time_"+tm[:-6]+".png"
-    plt.savefig(filename)
 
-merge_gdd("./linear-csv-cum-input") 
-   
+    plt.savefig(output_file)
+
+merge_gdd(input_dir=args.input_dir, output_file=args.output_file)
 
 
-               
-         
+
+
+
 
 
 # In[ ]:
-
-
-
