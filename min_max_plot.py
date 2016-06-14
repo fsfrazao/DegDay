@@ -5,14 +5,18 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 import sys
+from glob import glob
+import argparse
+import os
+import re
 
 def bytespdate2num(fmt, encoding='utf-8'):
     """Converting data stamps for Matplotlib
     
         Args:
             Function bytespdate2num() takes the data, decodes the data based on the encoding, then it returns that.
+"""    
     
-    """
     strconverter = mdates.strpdate2num(fmt)
     def bytesconverter(b):
         s = b.decode(encoding)
@@ -20,13 +24,14 @@ def bytespdate2num(fmt, encoding='utf-8'):
     return bytesconverter
 
 
+
 def read_weather(file_name):
     """Read MinMax csv file
 
         Args:
             read_weather(file_name): a path to the csv file containing the MinMax data.
-        
-    """
+"""        
+    
     dtypes = np.dtype({ 'names' : ('date','max temp', 'min temp'),
                         'formats' : ['S9', np.float,np.float] })
 
@@ -48,13 +53,18 @@ def plot_MinMax(csv_file):
     plt.title("Min and Max Temperature")
     plt.ylabel("temp")
     plt.xlabel("date")
-    plot_min_max = plt.savefig(csv_file[:-3]+"png", format="png")
-    return plot_min_max
+    #save plot to output directory
+    filename = os.path.join('/home/darren/Downloads/DegDay/output', csv_file[:-3]+"png")
+    plot_min_max = plt.savefig(filename)
 
-try:
-	csv_file=sys.argv[1]
-	plot_MinMax(csv_file)
+path=os.chdir('folder')	
+csv_folder_file = glob('*.csv')
 
-except Exception as e:
-	raise e
-	print(e)
+
+for i in csv_folder_file:
+        
+	print(i)
+	minmax = plot_MinMax(i)	
+
+
+
