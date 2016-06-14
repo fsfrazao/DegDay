@@ -57,7 +57,7 @@ def plot_MinMax(csv_file):
     filename = os.path.join("../output", csv_file[:-3]+"png")
     plot_min_max = plt.savefig(filename)
 
-path=os.chdir('Task4_input')
+path=os.chdir('Min_Max_input')
 csv_folder_file = glob('*.csv')
 
 
