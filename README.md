@@ -59,7 +59,7 @@ $ Make
 ```
 	* It will generate .pdf report with all the results.
 	* 
-## Web Presentation [Link](https://fsfrazao.github.io/DegDay/)
+## Web Presentation [Link](http://fsfrazao.github.io/DegDay/)
 
 
 
