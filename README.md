@@ -55,10 +55,10 @@ $ cd DegDay
 
 ## Run make
 ```console
-$ Make
+$ make
 ```
 	* It will generate .pdf report with all the results.
-	* 
+	
 ## Web Presentation [Link](http://fsfrazao.github.io/DegDay/)
 
 
