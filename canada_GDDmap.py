@@ -9,7 +9,7 @@
  
  Run script to get the Effective growing degree days of the year 2001-2005 from the commandline
  
- $ python map.py 
+ $ python Canada_GDDmap.py 
 """
 
 
