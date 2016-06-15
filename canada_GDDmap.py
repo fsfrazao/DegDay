@@ -83,6 +83,7 @@ m.drawmeridians(meridians,labels=[0,0,0,1],fontsize=10)
 #Plot
 m.scatter(x, y, c=EGDD, alpha =0.3, s =2500, cmap=cm2.get_cmap('jet'), zorder=2)
 m.scatter(x, y, c=EGDD, alpha=0.3, s=500, cmap=cm2.get_cmap('jet'), zorder=3)
+plt.title('EFFECTIVE GROWING DEGREE DAYS FOR CANADA AND NEWFOUNDLAND 2001-2005')
 plt.show()
 
 
