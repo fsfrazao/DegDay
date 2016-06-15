@@ -45,7 +45,7 @@ Examples of these input files are provided. You may modify them as you need.
 
 #To run the project on your machine
 
-## Clone ths repository repository
+## Clone ths repository
 ```console
 $ cd ~/DirectoryName
 (clone the repo)
@@ -54,6 +54,9 @@ $ cd DegDay
 ```
 
 ## Run make
+```console
+$ Make
+```
 	* It will generate .pdf report with all the results.
 
 
