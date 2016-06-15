@@ -57,10 +57,3 @@ def merge_gdd(input_dir, output_file):
 
 merge_gdd(input_dir=args.input_dir, output_file=args.output_file)
 
-
-
-
-
-
-
-# In[ ]:

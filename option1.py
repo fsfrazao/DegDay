@@ -51,10 +51,10 @@ def plot_gdd(filename1, filename2, filename3):
     ax1.plot(index,y,label="Average",color='red',linewidth=2.5, linestyle="-")
     ax1.legend(loc=2,shadow=True)
   
-    filename = os.path.join("/home/darren/Downloads/output", filename1[:-3]+"png")
+    filename = os.path.join("../output/", filename1[:-3]+"png")
     plot_min_max = plt.savefig(filename)
 
-path=os.chdir('/home/darren/Downloads')
+path=os.chdir('./csv-data/')
 csv_folder_file = glob('*.csv')
 n=size(csv_folder_file)
 if n==1:
