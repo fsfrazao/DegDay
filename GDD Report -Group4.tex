@@ -3,6 +3,9 @@
 \setlength{\textwidth}{5.5in}
 \setlength{\topmargin}{0in}
 \setlength{\textheight}{8.0in}
+\usepackage{booktabs}
+
+
 
 \newtheorem{theorem}{Theorem}
 \usepackage{graphicx}
@@ -106,17 +109,64 @@ Section 3 of this paper performs an extensive review on related works in .......
 \end{enumerate}
 
 
-
-\begin{figure}[h]
-  \includegraphics[width=15cm]{cummulative_GDD.png}
-  \caption{Cummulative GDD for 3 cities.}
- \includegraphics[width=20cm]{min_max_temperature.png}
-  \caption{Annual Minimum and Maximum temperature.}
+\section{\bf Optional Task 4: Regression Analysis Summary}
+\begin{figure}[tb]
+ 
  \includegraphics[width=15cm]{tbase_analysis.png}
-  \caption{The variation of GDD with the base temperature}
+ \caption{Variation of GDD with Tbase}
+ \includegraphics[width=15cm]{cummulative_GDD.png}
+  \caption{Cummulative GDD }
+
+\label(fig: GDD Analysis)
 
 \end{figure}
 
+\begin{figure}[p!]
+ 
+ \includegraphics[width=17cm]{min_max_temperature.png}
+  \caption{Annual Minimum and Maximum Temperature}
+ \includegraphics[width=17cm]{linear_model_plot.png}
+  \caption{Linear Regression showing the best fit}
+
+
+
+\end{figure}
+\begin{figure}[h!]
+ 
+ \includegraphics[width=17cm]{option1.png}
+  \caption{GDD for selected Canadian Cities}
+
+\end{figure}
+
+\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}    &       gdd        & \textbf{  R-squared:         } &     0.708   \\
+\textbf{Model:}            &       OLS        & \textbf{  Adj. R-squared:    } &     0.634   \\
+\textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } &     9.678   \\
+\textbf{Date:}             & Tue, 14 Jun 2016 & \textbf{  Prob (F-statistic):} &   0.0358    \\
+\textbf{Time:}             &     14:48:06     & \textbf{  Log-Likelihood:    } &   -39.423   \\
+\textbf{No. Observations:} &           6      & \textbf{  AIC:               } &     82.85   \\
+\textbf{Df Residuals:}     &           4      & \textbf{  BIC:               } &     82.43   \\
+\textbf{Df Model:}         &           1      & \textbf{                     } &             \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lccccc}
+                   & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$>$$|$t$|$} & \textbf{[95.0\% Conf. Int.]}  \\
+\midrule
+\textbf{Intercept} &    3.168e+05  &     1.02e+05     &     3.113  &         0.036        &      3.43e+04  5.99e+05       \\
+\textbf{year}      &    -157.3100  &       50.565     &    -3.111  &         0.036        &      -297.702   -16.918       \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lclc}
+\textbf{Omnibus:}       &    nan & \textbf{  Durbin-Watson:     } &    1.618  \\
+\textbf{Prob(Omnibus):} &    nan & \textbf{  Jarque-Bera (JB):  } &    0.721  \\
+\textbf{Skew:}          & -0.669 & \textbf{  Prob(JB):          } &    0.697  \\
+\textbf{Kurtosis:}      &  1.954 & \textbf{  Cond. No.          } & 2.37e+06  \\
+\bottomrule
+\end{tabular}
+%\caption{OLS Regression Results}
+\end{center}
 
 
 
@@ -128,9 +178,8 @@ Section 3 of this paper performs an extensive review on related works in .......
 \begin{thebibliography}{99}
 
 \bibitem{ERE 87}
-G. Edward Barton, Robert C. Berwick, and Eric S. Ristad. 1987. 
-{\em Computational Complexity and Natural Language}. MIT Press, Cambridge, 
-MA.
+McMaster GS, Wilhelm WW (1997){\em Growing degree-days: one equation, two interpretations. Agric For Meteorol} 87:291–300
+
 
 
 
