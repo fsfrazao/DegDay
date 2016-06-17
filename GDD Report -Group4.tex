@@ -13,6 +13,13 @@
 \newtheorem{observation}{Observation}
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 
 
 
@@ -32,12 +39,13 @@ Frazao, Fabio Soares\\
 Chenxiao Jia\\
 Fatima Shaheen\\
 Dianlong Zhang\\
+Dayo Osunrinde\\
 
-\vspace*{0.4in}  
+\vspace*{0.3in}  
 \textsc{\small In partial fulfilment of the requirements of CMSC 6950(Computer Based Research Tools and Application),2016}
 
 \end{center}
-\vspace*{5.0in}
+\vspace*{4.7in}
 \begin{flushleft}
 {\textsc Memorial University of Newfoundland,} \\
 \today
@@ -94,30 +102,17 @@ Historical near-surface air temperature data from many cities in canada are avai
 
 \noindent
 \section{ \bf Overview}
-Section 3 of this paper performs an extensive review on related works in .......
-
-
-\section{\bf Workflow}
-
-\begin{enumerate}
-\item Create a code to automatically download daily historical temperature data for several cities
-\item Load the data into an intermediate data storage format(CSV)
-\item Munge the data by removing legends and extracting relevant columns
-\item Create a function that calculates the GDD for specific base temperature and Upper temperature
-\item Generate plots
-\item Visualization and interperetation of plots
-\end{enumerate}
-
-
+Section 3 of this paper shows the regression summary using the cummulative GDD as the dependent variable and the year as the independent variable in St Johns over a period of 50 years. The summary is all comprehensive as it includes the  r-square, intercept and model .
+Please see Figure ~\ref{fig:GDDwithTbase} for the variation of GDD with the base temperature using a range of $0-30$ in 3 selected cities. Figure ~\ref{fig:cumGDD} shows the Cummulative GDD with time for 3 cities in Canada. Figure ~\ref{fig:Minmax} shows the anuual minimum and maximum temperature in canadian cities over a period of time,Figure ~\ref{fig:linreg} shows the linear regression for the GDD in St Johns over a period of 50 years.Figure ~\ref{fig:GDD4} shows the GDD for selected canadian cities  and Figure ~\ref{fig:EffGDD} is a map that shows the effective GDD over both all of Canada and only for the island of Newfoundland
 \section{\bf Optional Task 4: Regression Analysis Summary}
 \begin{figure}[tb]
- 
  \includegraphics[width=15cm]{tbase_analysis.png}
  \caption{Variation of GDD with Tbase}
+\label{fig:GDDwithTbase}
  \includegraphics[width=15cm]{cummulative_GDD.png}
   \caption{Cummulative GDD }
+\label{fig:cumGDD}
 
-\label(fig: GDD Analysis)
 
 \end{figure}
 
@@ -125,9 +120,10 @@ Section 3 of this paper performs an extensive review on related works in .......
  
  \includegraphics[width=17cm]{min_max_temperature.png}
   \caption{Annual Minimum and Maximum Temperature}
+\label{fig:Minmax}
  \includegraphics[width=17cm]{linear_model_plot.png}
   \caption{Linear Regression showing the best fit}
-
+\label{fig:linreg}
 
 
 \end{figure}
@@ -135,39 +131,42 @@ Section 3 of this paper performs an extensive review on related works in .......
  
  \includegraphics[width=17cm]{option1.png}
   \caption{GDD for selected Canadian Cities}
+\label{fig:GDD4}
+ \includegraphics[width=18cm]{EffectiveGdd_1.png}
+  \caption{Effective Growing Degree Days over Canada}
+\label{fig:EffGDD}
 
 \end{figure}
 
 \begin{center}
 \begin{tabular}{lclc}
 \toprule
-\textbf{Dep. Variable:}    &       gdd        & \textbf{  R-squared:         } &     0.708   \\
-\textbf{Model:}            &       OLS        & \textbf{  Adj. R-squared:    } &     0.634   \\
-\textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } &     9.678   \\
-\textbf{Date:}             & Tue, 14 Jun 2016 & \textbf{  Prob (F-statistic):} &   0.0358    \\
-\textbf{Time:}             &     14:48:06     & \textbf{  Log-Likelihood:    } &   -39.423   \\
-\textbf{No. Observations:} &           6      & \textbf{  AIC:               } &     82.85   \\
-\textbf{Df Residuals:}     &           4      & \textbf{  BIC:               } &     82.43   \\
+\textbf{Dep. Variable:}    &       gdd        & \textbf{  R-squared:         } &     0.124   \\
+\textbf{Model:}            &       OLS        & \textbf{  Adj. R-squared:    } &     0.111   \\
+\textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } &     9.094   \\
+\textbf{Date:}             & Fri, 17 Jun 2016 & \textbf{  Prob (F-statistic):} &  0.00368    \\
+\textbf{Time:}             &     13:25:05     & \textbf{  Log-Likelihood:    } &   -390.01   \\
+\textbf{No. Observations:} &          66      & \textbf{  AIC:               } &     784.0   \\
+\textbf{Df Residuals:}     &          64      & \textbf{  BIC:               } &     788.4   \\
 \textbf{Df Model:}         &           1      & \textbf{                     } &             \\
 \bottomrule
 \end{tabular}
 \begin{tabular}{lccccc}
                    & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$>$$|$t$|$} & \textbf{[95.0\% Conf. Int.]}  \\
 \midrule
-\textbf{Intercept} &    3.168e+05  &     1.02e+05     &     3.113  &         0.036        &      3.43e+04  5.99e+05       \\
-\textbf{year}      &    -157.3100  &       50.565     &    -3.111  &         0.036        &      -297.702   -16.918       \\
+\textbf{Intercept} &   -2825.5110  &     1156.733     &    -2.443  &         0.017        &     -5136.351  -514.671       \\
+\textbf{year}      &       1.7639  &        0.585     &     3.016  &         0.004        &         0.595     2.932       \\
 \bottomrule
 \end{tabular}
 \begin{tabular}{lclc}
-\textbf{Omnibus:}       &    nan & \textbf{  Durbin-Watson:     } &    1.618  \\
-\textbf{Prob(Omnibus):} &    nan & \textbf{  Jarque-Bera (JB):  } &    0.721  \\
-\textbf{Skew:}          & -0.669 & \textbf{  Prob(JB):          } &    0.697  \\
-\textbf{Kurtosis:}      &  1.954 & \textbf{  Cond. No.          } & 2.37e+06  \\
+\textbf{Omnibus:}       &  2.338 & \textbf{  Durbin-Watson:     } &    1.727  \\
+\textbf{Prob(Omnibus):} &  0.311 & \textbf{  Jarque-Bera (JB):  } &    1.626  \\
+\textbf{Skew:}          & -0.355 & \textbf{  Prob(JB):          } &    0.443  \\
+\textbf{Kurtosis:}      &  3.297 & \textbf{  Cond. No.          } & 2.05e+05  \\
 \bottomrule
 \end{tabular}
 %\caption{OLS Regression Results}
 \end{center}
-
 
 
 
